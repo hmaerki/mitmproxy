@@ -29,9 +29,9 @@ sudo rpi-update
 sudo raspi-config
   4 -> I2, change Timezone: Europe/Zurich
   5 -> P2, SSH: Enable
-# Hostname
+# Hostname: rpi-mitmproxy
 vi /etc/hostname
-rpi-mitmproxy
+vi /etc/hosts
 ```
 
 ## Install Visual Studio Code

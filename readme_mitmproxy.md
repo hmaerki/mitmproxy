@@ -54,6 +54,15 @@ pip3 install --upgrade pip
 pip3 install -e ~rpi-mitmproxy/
 pip3 install pillow
 
+## Copy certificate
+
+``` bash
+openssl x509 -in ~/.mitmproxy/mitmproxy-ca.pem -inform PEM -out ~/.mitmproxy/mitmproxy-ca.crt
+sudo mkdir /usr/share/ca-certificates/extra
+sudo cp /home/pi/.mitmproxy/mitmproxy-ca.crt /usr/share/ca-certificates/extra/
+sudo dpkg-reconfigure ca-certificates
+```
+
 ## Register as a service
 
 See: https://discourse.mitmproxy.org/t/mitm-proxy-on-ubuntu-startup/943/2
@@ -63,7 +72,7 @@ sudo cp /home/pi/rpi-mitmproxy/mitmdump.service_template /lib/systemd/system/mit
 
 sudo systemctl daemon-reload
 sudo systemctl enable mitmdump.service
-sudo systemctl start mitmdump.service
+sudo systemctl restart mitmdump.service
 ```
 
 # Configure Browser
@@ -80,4 +89,11 @@ network.proxy.ssl_port 8080
 network.proxy.type 1
 ```
 
+In Firefox - install certificate
+
+``` text
+http://mitm.it
+-> click on 'other'
+-> Check two boxes and add certificate
+```
 
